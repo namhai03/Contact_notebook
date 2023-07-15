@@ -4,7 +4,11 @@ class LienLac:
     def __init__(self):
         self.conn = sqlite3.connect("sotay.db")
         self.cursor = self.conn.cursor()
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS danh_ba (id INTEGER PRIMARY KEY AUTOINCREMENT, ten TEXT, so_dien_thoai TEXT, email TEXT)")
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS 
+                            danh_ba (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                            ten TEXT, 
+                            so_dien_thoai TEXT, 
+                            email TEXT)''')
 
     def __del__(self):
         self.conn.close()
@@ -23,7 +27,8 @@ class LienLac:
         ten = input("Nhập tên: ")
         so_dien_thoai = input("Nhập số điện thoại: ")
         email = input("Nhập email: ")
-        self.cursor.execute("INSERT INTO danh_ba (ten, so_dien_thoai, email) VALUES (?, ?, ?)", (ten, so_dien_thoai, email))
+        self.cursor.execute('''INSERT INTO danh_ba (ten, so_dien_thoai, email) 
+                            VALUES (?, ?, ?)''', (ten, so_dien_thoai, email))
         self.conn.commit()
         print("Thông tin đã được thêm vào sổ tay ghi chép.")
 
@@ -44,7 +49,11 @@ class LienLac:
             ten_moi = input(f"Tên ({row[1]}): ")
             so_dien_thoai_moi = input(f"Số điện thoại ({row[2]}): ")
             email_moi = input(f"Email ({row[3]}): ")
-            self.cursor.execute("UPDATE danh_ba SET ten=?, so_dien_thoai=?, email=? WHERE id=?", (ten_moi, so_dien_thoai_moi, email_moi, id))
+            self.cursor.execute('''UPDATE danh_ba SET 
+                                ten=?, 
+                                so_dien_thoai=?,
+                                email=? 
+                                WHERE id=? ''', (ten_moi, so_dien_thoai_moi, email_moi, id))
             self.conn.commit()
             print("Thông tin người dùng đã được cập nhật.")
         else:
