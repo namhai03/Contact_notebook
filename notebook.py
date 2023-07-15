@@ -9,7 +9,7 @@ class LienLac:
                             ten TEXT, 
                             so_dien_thoai TEXT, 
                             email TEXT)''')
-
+ 
     def __del__(self):
         self.conn.close()
 
@@ -49,8 +49,8 @@ class LienLac:
             ten_moi = input(f"Tên ({row[1]}): ")
             so_dien_thoai_moi = input(f"Số điện thoại ({row[2]}): ")
             email_moi = input(f"Email ({row[3]}): ")
-            self.cursor.execute('''UPDATE danh_ba SET 
-                                ten=?, 
+            self.cursor.execute('''UPDATE danh_ba 
+                                SET ten=?, 
                                 so_dien_thoai=?,
                                 email=? 
                                 WHERE id=? ''', (ten_moi, so_dien_thoai_moi, email_moi, id))
